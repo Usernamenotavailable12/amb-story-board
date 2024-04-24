@@ -1,414 +1,416 @@
-
 <style>
-  .stories-container {
-    max-width: 600px;
-    margin: 24px auto;
-    position: relative;
-  }
-  .stories-container .previous-btn,
-  .stories-container .next-btn,
-  .stories-full-view .previous-btn,
-  .stories-full-view .next-btn {
-    width: 30px;
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #444;
-    color: #fff;
-    border-radius: 50%;
-    padding: 10px;
-    display: flex;
-    cursor: pointer;
-  }
-  
-  .stories-container .previous-btn,
-  .stories-container .next-btn {
-    opacity: 0;
-    pointer-events: none;
-    transition: all 400ms ease;
-  }
-  
-  .stories-container .previous-btn.active,
-  .stories-container .next-btn.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .stories-container .previous-btn,
-  .stories-full-view .previous-btn {
-    left: 8px;
-  }
-  
-  .stories-container .next-btn,
-  .stories-full-view .next-btn {
-    right: 8px;
-  }
-  
-  .stories-container .story {
-    height: 180px;
-    width: 120px;
-    flex-shrink: 0;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .stories-container .story img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .stories-container .stories {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .stories-container .content {
-    overflow-x: scroll;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-  }
-  
-  .stories-container .content::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .stories-container .author {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 8px 16px;
-    font-size: 15px;
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(transparent, #222 130%);
-  }
-  
-  .stories-full-view {
-    position: fixed;
-    inset: 0;
-    z-index: 5;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    place-items: center;
-  }
-  
-  .stories-full-view.active {
-    display: grid;
-  }
-  
-  .stories-full-view .close-btn {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    width: 30px;
-    background: #444;
-    color: #fff;
-    border-radius: 50%;
-    padding: 10px;
-    display: flex;
-    z-index: 20;
-    cursor: pointer;
-  }
-  
-  .stories-full-view .content {
-    height: 90vh;
-    width: 100%;
-    max-width: 700px;
-    position: relative;
-  }
-  
-  .stories-full-view .story {
-    height: 100%;
-    text-align: center;
-  }
-  
-  .stories-full-view .story img {
-    height: 100%;
-    aspect-ratio: 10/16;
-    object-fit: cover;
-    border-radius: 16px;
-  }
-  
-  .stories-full-view .author {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: "Roboto", sans-serif;
-    font-size: 18px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 4px 32px;
-    border-radius: 8px;
-  }
-  
-      </style>
-    <body>
-      <div class="stories-container">
-        <div class="content">
-          <div class="previous-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </div>
-  
-          <div class="stories"></div>
-  
-          <div class="next-btn active">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-  
-      <div class="stories-full-view">
-        <div class="close-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </div>
-  
-        <div class="content">
-          <div class="previous-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </div>
-  
-          <div class="story">
-            <img src="images/3.jpg" alt="" />
-            <div class="author">Author</div>
-          </div>
-  
-          <div class="next-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .stories-container {
+      max-width: 600px;
+      margin: 0px auto;
+      position: relative;
+    }
+    .stories-container .previous-btn,
+    .stories-container .next-btn,
+    .stories-full-view .previous-btn,
+    .stories-full-view .next-btn {
+      width: 30px;
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #444;
+      color: #fff;
+      border-radius: 50%;
+      padding: 10px;
+      display: flex;
+      cursor: pointer;
+    }
+    
+    .stories-container .previous-btn,
+    .stories-container .next-btn {
+      opacity: 0;
+      pointer-events: none;
+      transition: all 400ms ease;
+    }
+    
+    .stories-container .previous-btn.active,
+    .stories-container .next-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .stories-container .previous-btn,
+    .stories-full-view .previous-btn {
+      left: 8px;
+    }
+    
+    .stories-container .next-btn,
+    .stories-full-view .next-btn {
+      right: 8px;
+    }
+    
+    .stories-container .story {
+      height: 180px;
+      width: 120px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .stories-container .story img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .stories-container .stories {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .stories-container .content {
+      overflow-x: scroll;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+    
+    .stories-container .content::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .stories-container .author {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(transparent, #222 130%);
+    }
+    
+    .stories-full-view {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      place-items: center;
+    }
+    
+    .stories-full-view.active {
+      display: grid;
+    }
+    
+    .stories-full-view .close-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 30px;
+      background: #444;
+      color: #fff;
+      border-radius: 50%;
+      padding: 10px;
+      display: flex;
+      z-index: 20;
+      cursor: pointer;
+    }
+    
+    .stories-full-view .content {
+      height: 90vh;
+      width: 100%;
+      max-width: 700px;
+      position: relative;
+    }
+    
+    .stories-full-view .story {
+      height: 100%;
+      text-align: center;
+    }
+    
+    .stories-full-view .story img {
+      height: 100%;
+      aspect-ratio: 10/16;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    
+    .stories-full-view .author {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 4px 32px;
+      border-radius: 8px;
+    }
+    
+        </style>
+      <body>
+        <div class="stories-container">
+          <div class="content">
+            <div class="previous-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </div>
+    
+            <div class="stories"></div>
+    
+            <div class="next-btn active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-  
-      <script>
-        const allStories = [
-    {
-      id: 0,
-      author: "Ambassadori League",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/ddfdf389-9a71-432c-897f-18ad5e02ac24/Ambasadori%20League%20Mobile.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 1,
-      author: "Kvara Reactoonz",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/1af8c4d3-46d1-4587-9748-199c28e20526/Mobile%20Banner%202.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 2,
-      author: "Hacksaw Gaming",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/132da97b-c788-4255-b542-e253be298998/Hacksaw-Mobile-Banner.jpg?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 3,
-      author: "Kvara's Weekend",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/5c38626a-f022-459e-a7d8-27f174c12f1a/Kvara%20Placeholder%20Mobile.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 4,
-      author: "Napoli Vs Real Madrid",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/ce7884e3-6653-4db8-b9c3-17bfc1f7b4c6/Kvara%20MOBILE%20EN%202.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 5,
-      author: "Happy Hour Promotion",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/0906d509-1752-4b9a-ad2b-1ecebf4de1ea/Tournaments%20Mobile%20Banner%20Happy%20Hour%201.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 6,
-      author: "Free Spins",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/1140778d-385b-4668-a1df-a6b09ee290a4/Offers%20Page%20MOBILE%202.png?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 7,
-      author: "Double Deposit",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/aceb45c4-4923-485e-aadf-1bbc92be1658/double-Mobile-Banner-en.jpg?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 8,
-      author: "Leaderboards",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/335ae4c1-cc60-4ca8-9626-8545362d483c/Mobile-Banner-tournaments.jpg?auto=format%2Ccompress",
-    },
-  
-    {
-      id: 9,
-      author: "Cash Back",
-      imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/fc567f4f-acc7-450b-9562-b9443ce0c50a/cashback-Mobile-Banner.jpg?auto=format%2Ccompress",
-    },
-  ];
-  
-  const stories = document.querySelector(".stories");
-  const storiesFullView = document.querySelector(".stories-full-view");
-  const closeBtn = document.querySelector(".close-btn");
-  const storyImageFull = document.querySelector(".stories-full-view .story img");
-  const storyAuthorFull = document.querySelector(
-    ".stories-full-view .story .author"
-  );
-  const nextBtn = document.querySelector(".stories-container .next-btn");
-  const previousBtn = document.querySelector(".stories-container .previous-btn");
-  const storiesContent = document.querySelector(".stories-container .content");
-  const nextBtnFull = document.querySelector(".stories-full-view .next-btn");
-  const previousBtnFull = document.querySelector(
-    ".stories-full-view .previous-btn"
-  );
-  
-  let currentActive = 0;
-  
-  const createStories = () => {
-    allStories.forEach((s, i) => {
-      const story = document.createElement("div");
-      story.classList.add("story");
-      const img = document.createElement("img");
-      img.src = s.imageUrl;
-      const author = document.createElement("div");
-      author.classList.add("author");
-      author.innerHTML = s.author;
-  
-      story.appendChild(img);
-      story.appendChild(author);
-  
-      stories.appendChild(story);
-  
-      story.addEventListener("click", () => {
-        showFullView(i);
+    
+        <div class="stories-full-view">
+          <div class="close-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+    
+          <div class="content">
+            <div class="previous-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </div>
+    
+            <div class="story">
+              <img src="images/3.jpg" alt="" />
+              <div class="author">Author</div>
+            </div>
+    
+            <div class="next-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+    
+        <script>
+          const allStories = [
+      {
+        id: 0,
+        author: "Ambassadori League",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/ddfdf389-9a71-432c-897f-18ad5e02ac24/Ambasadori%20League%20Mobile.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 1,
+        author: "Kvara Reactoonz",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/1af8c4d3-46d1-4587-9748-199c28e20526/Mobile%20Banner%202.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 2,
+        author: "Hacksaw Gaming",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/132da97b-c788-4255-b542-e253be298998/Hacksaw-Mobile-Banner.jpg?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 3,
+        author: "Kvara's Weekend",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/5c38626a-f022-459e-a7d8-27f174c12f1a/Kvara%20Placeholder%20Mobile.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 4,
+        author: "Napoli Vs Real Madrid",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/ce7884e3-6653-4db8-b9c3-17bfc1f7b4c6/Kvara%20MOBILE%20EN%202.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 5,
+        author: "Happy Hour Promotion",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/0906d509-1752-4b9a-ad2b-1ecebf4de1ea/Tournaments%20Mobile%20Banner%20Happy%20Hour%201.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 6,
+        author: "Free Spins",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/1140778d-385b-4668-a1df-a6b09ee290a4/Offers%20Page%20MOBILE%202.png?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 7,
+        author: "Double Deposit",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/aceb45c4-4923-485e-aadf-1bbc92be1658/double-Mobile-Banner-en.jpg?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 8,
+        author: "Leaderboards",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/335ae4c1-cc60-4ca8-9626-8545362d483c/Mobile-Banner-tournaments.jpg?auto=format%2Ccompress",
+      },
+    
+      {
+        id: 9,
+        author: "Cash Back",
+        imageUrl: "https://images.takeshape.io/5da2b4d5-59f6-412a-82c3-f6a272b532be/dev/fc567f4f-acc7-450b-9562-b9443ce0c50a/cashback-Mobile-Banner.jpg?auto=format%2Ccompress",
+      },
+    ];
+    
+    const stories = document.querySelector(".stories");
+    const storiesFullView = document.querySelector(".stories-full-view");
+    const closeBtn = document.querySelector(".close-btn");
+    const storyImageFull = document.querySelector(".stories-full-view .story img");
+    const storyAuthorFull = document.querySelector(
+      ".stories-full-view .story .author"
+    );
+    const nextBtn = document.querySelector(".stories-container .next-btn");
+    const previousBtn = document.querySelector(".stories-container .previous-btn");
+    const storiesContent = document.querySelector(".stories-container .content");
+    const nextBtnFull = document.querySelector(".stories-full-view .next-btn");
+    const previousBtnFull = document.querySelector(
+      ".stories-full-view .previous-btn"
+    );
+    
+    let currentActive = 0;
+    
+    const createStories = () => {
+      allStories.forEach((s, i) => {
+        const story = document.createElement("div");
+        story.classList.add("story");
+        const img = document.createElement("img");
+        img.src = s.imageUrl;
+        const author = document.createElement("div");
+        author.classList.add("author");
+        author.innerHTML = s.author;
+    
+        story.appendChild(img);
+        story.appendChild(author);
+    
+        stories.appendChild(story);
+    
+        story.addEventListener("click", () => {
+          showFullView(i);
+        });
       });
+    };
+    
+    createStories();
+    
+    const showFullView = (index) => {
+      currentActive = index;
+      updateFullView();
+      storiesFullView.classList.add("active");
+    };
+    
+    closeBtn.addEventListener("click", () => {
+      storiesFullView.classList.remove("active");
     });
-  };
-  
-  createStories();
-  
-  const showFullView = (index) => {
-    currentActive = index;
-    updateFullView();
-    storiesFullView.classList.add("active");
-  };
-  
-  closeBtn.addEventListener("click", () => {
-    storiesFullView.classList.remove("active");
-  });
-  
-  const updateFullView = () => {
-    storyImageFull.src = allStories[currentActive].imageUrl;
-    storyAuthorFull.innerHTML = allStories[currentActive].author;
-  };
-  
-  nextBtn.addEventListener("click", () => {
-    storiesContent.scrollLeft += 300;
-  });
-  
-  previousBtn.addEventListener("click", () => {
-    storiesContent.scrollLeft -= 300;
-  });
-  
-  storiesContent.addEventListener("scroll", () => {
-    if (storiesContent.scrollLeft <= 24) {
-      previousBtn.classList.remove("active");
-    } else {
-      previousBtn.classList.add("active");
-    }
-  
-    let maxScrollValue =
-      storiesContent.scrollWidth - storiesContent.clientWidth - 24;
-  
-    if (storiesContent.scrollLeft >= maxScrollValue) {
-      nextBtn.classList.remove("active");
-    } else {
-      nextBtn.classList.add("active");
-    }
-  });
-  
-  nextBtnFull.addEventListener("click", () => {
-    if (currentActive >= allStories.length - 1) {
-      return;
-    }
-    currentActive++;
-    updateFullView();
-  });
-  
-  previousBtnFull.addEventListener("click", () => {
-    if (currentActive <= 0) {
-      return;
-    }
-    currentActive--;
-    updateFullView();
-  });
-  
-      </script>
-  
-  
+    
+    const updateFullView = () => {
+      storyImageFull.src = allStories[currentActive].imageUrl;
+      storyAuthorFull.innerHTML = allStories[currentActive].author;
+    };
+    
+    nextBtn.addEventListener("click", () => {
+      storiesContent.scrollLeft += 300;
+    });
+    
+    previousBtn.addEventListener("click", () => {
+      storiesContent.scrollLeft -= 300;
+    });
+    
+    storiesContent.addEventListener("scroll", () => {
+      if (storiesContent.scrollLeft <= 24) {
+        previousBtn.classList.remove("active");
+      } else {
+        previousBtn.classList.add("active");
+      }
+    
+      let maxScrollValue =
+        storiesContent.scrollWidth - storiesContent.clientWidth - 24;
+    
+      if (storiesContent.scrollLeft >= maxScrollValue) {
+        nextBtn.classList.remove("active");
+      } else {
+        nextBtn.classList.add("active");
+      }
+    });
+    
+    nextBtnFull.addEventListener("click", () => {
+      if (currentActive >= allStories.length - 1) {
+        return;
+      }
+      currentActive++;
+      updateFullView();
+    });
+    
+    previousBtnFull.addEventListener("click", () => {
+      if (currentActive <= 0) {
+        return;
+      }
+      currentActive--;
+      updateFullView();
+    });
+    
+        </script>
+    
